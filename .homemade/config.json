@@ -1,0 +1,32 @@
+{
+  "$schema": "https://homemade.dev/schemas/latest/config.json",
+  "setup": [
+    "apt-get update && apt-get install -y --no-install-recommends build-essential pkg-config libssl-dev ca-certificates curl"
+  ],
+  "warmup": [
+    "cargo build --locked --features sqlite -j 2",
+    "mkdir -p data target && if [ ! -f web-vault/vw-version.json ]; then curl --fail --location --retry 3 --max-time 120 https://github.com/dani-garcia/bw_web_builds/releases/download/v2026.10.1/bw_web_v2026.10.1.tar.gz -o target/web-vault.tar.gz && tar -xzf target/web-vault.tar.gz; fi"
+  ],
+  "install": [
+    "cargo build --locked --features sqlite -j 2",
+    "mkdir -p data target && if [ ! -f web-vault/vw-version.json ]; then curl --fail --location --retry 3 --max-time 120 https://github.com/dani-garcia/bw_web_builds/releases/download/v2026.10.1/bw_web_v2026.10.1.tar.gz -o target/web-vault.tar.gz && tar -xzf target/web-vault.tar.gz; fi"
+  ],
+  "services": {
+    "web": {
+      "cmd": "exec cargo run --locked --features sqlite -j 2",
+      "port": 8000,
+      "url": true,
+      "healthcheck": {
+        "path": "/alive"
+      },
+      "displayName": "Vaultwarden"
+    }
+  },
+  "env_schema": [
+    "DOMAIN",
+    "ROCKET_ADDRESS",
+    "ROCKET_PORT",
+    "RELOAD_TEMPLATES",
+    "ADMIN_TOKEN"
+  ]
+}
