@@ -8,7 +8,6 @@
     "mkdir -p data target && if [ ! -f web-vault/vw-version.json ]; then curl --fail --location --retry 3 --max-time 120 https://github.com/dani-garcia/bw_web_builds/releases/download/v2026.10.1/bw_web_v2026.10.1.tar.gz -o target/web-vault.tar.gz && tar -xzf target/web-vault.tar.gz; fi"
   ],
   "install": [
-    "cargo build --locked --features sqlite -j 2",
     "mkdir -p data target && if [ ! -f web-vault/vw-version.json ]; then curl --fail --location --retry 3 --max-time 120 https://github.com/dani-garcia/bw_web_builds/releases/download/v2026.10.1/bw_web_v2026.10.1.tar.gz -o target/web-vault.tar.gz && tar -xzf target/web-vault.tar.gz; fi"
   ],
   "services": {
@@ -27,6 +26,7 @@
     "ROCKET_ADDRESS",
     "ROCKET_PORT",
     "RELOAD_TEMPLATES",
+    "TEMPLATES_FOLDER",
     "ADMIN_TOKEN"
   ]
 }
