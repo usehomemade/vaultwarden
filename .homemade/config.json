@@ -1,8 +1,7 @@
 {
   "$schema": "https://homemade.dev/schemas/latest/config.json",
   "setup": [
-    "apt-get update && apt-get install -y --no-install-recommends build-essential pkg-config libssl-dev ca-certificates curl",
-    "sudo -u homemade env RUSTUP_DIST_SERVER=https://static.rust-lang.org mise install rust@1.99.1"
+    "apt-get update && apt-get install -y --no-install-recommends build-essential pkg-config libssl-dev ca-certificates curl"
   ],
   "warmup": [
     "cargo fetch --locked",
